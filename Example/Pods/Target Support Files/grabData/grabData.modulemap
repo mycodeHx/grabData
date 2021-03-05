@@ -1,0 +1,6 @@
+framework module grabData {
+  umbrella header "grabData-umbrella.h"
+
+  export *
+  module * { export * }
+}

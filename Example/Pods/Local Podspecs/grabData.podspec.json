@@ -1,0 +1,22 @@
+{
+  "name": "grabData",
+  "version": "0.1.0",
+  "summary": "A short description of grabData.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/641559096@qq.com/grabData",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "641559096@qq.com": "641559096@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/641559096@qq.com/grabData.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "grabData/Classes/**/*"
+}
