@@ -8,20 +8,17 @@ PODS:
 
 DEPENDENCIES:
   - FBSnapshotTestCase
-  - grabData (from `../`)
+  - grabData
 
 SPEC REPOS:
   trunk:
     - FBSnapshotTestCase
-
-EXTERNAL SOURCES:
-  grabData:
-    :path: "../"
+    - grabData
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  grabData: cd206bcf62c1fe6e31ea5dbf01e7d807369c0191
+  grabData: 08e38f0f80530c097fee8fe5bea3c2ef1f3449db
 
-PODFILE CHECKSUM: 14ce771be3338f4c60ca5c7c522c875e3c7de4b3
+PODFILE CHECKSUM: e16efb9f5c5555f0d6092d18b8fb02ce30bcc169
 
 COCOAPODS: 1.9.1

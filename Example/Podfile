@@ -3,7 +3,7 @@ use_frameworks!
 platform :ios, '9.0'
 
 target 'grabData_Example' do
-  pod 'grabData', :path => '../'
+  pod 'grabData'
 
   target 'grabData_Tests' do
     inherit! :search_paths

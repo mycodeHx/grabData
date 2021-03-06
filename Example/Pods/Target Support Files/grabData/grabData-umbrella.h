@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "MD5.h"
 
 FOUNDATION_EXPORT double grabDataVersionNumber;
 FOUNDATION_EXPORT const unsigned char grabDataVersionString[];

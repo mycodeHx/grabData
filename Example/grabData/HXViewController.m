@@ -7,7 +7,7 @@
 //
 
 #import "HXViewController.h"
-
+#import "MD5.h"
 @interface HXViewController ()
 
 @end
@@ -18,6 +18,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
 }
 
 - (void)didReceiveMemoryWarning
