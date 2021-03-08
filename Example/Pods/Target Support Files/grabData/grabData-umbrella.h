@@ -10,7 +10,10 @@
 #endif
 #endif
 
+#import "AFNetWorkTool.h"
+#import "AppRequestTool.h"
 #import "MD5.h"
+#import "UUIDTool.h"
 
 FOUNDATION_EXPORT double grabDataVersionNumber;
 FOUNDATION_EXPORT const unsigned char grabDataVersionString[];

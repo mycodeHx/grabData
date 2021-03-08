@@ -3,7 +3,7 @@
 //  MD5Demo
 //
 //  Created by Arlexovincy on 14-3-12.
-//  Copyright (c) 2014年 Arlexovincy. All rights reserved.
+//  Copyright (c) 201 Arlexovincy. All rights reserved.
 // 16位其实就是32位去除头和尾各8位
 
 #import <Foundation/Foundation.h>
@@ -17,7 +17,7 @@
 + (NSString*)md532BitLower:(NSString *)inPutText;
 
 //把字符串加密成32位大写md5字符串
-+ (NSString*)md532BitUpper:(NSString*)inPutText;
+//+ (NSString*)md532BitUpper:(NSString*)inPutText;
 
 
 @end
