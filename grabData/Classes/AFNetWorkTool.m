@@ -17,6 +17,8 @@
     return manager;
 }
 + (NSDictionary *)getheadParam {
+    NSLog(@"");
+
     
     return @{};
    
