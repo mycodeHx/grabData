@@ -9,20 +9,36 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+为了能够将项目运行起来，你先运行 pod install 命令
+
 ## Requirements
 
-## Installation
+## Installation (安装)
 
 grabData is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
+
+在podfile 文件中加入 以下文件
 
 ```ruby
 pod 'grabData'
 ```
 
-## Author
+## Author(作者)
 
-641559096@qq.com, 641559096@qq.com
+641559096@qq.com, 
+
+
+
+Demo详情请见 Example
+
+
+
+
+
+ [[NSThread currentThread].threadDictionary setObject:@"232c6fdc2826f7b77c28a23d7cb11fbd" forKey:@"ak"];
+
+
 
 ## License
 

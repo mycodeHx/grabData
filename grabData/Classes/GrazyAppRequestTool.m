@@ -5,13 +5,13 @@
 //  Created by hx on 2021/3/1.
 //
 
-#import "AppRequestTool.h"
-#import "UUIDTool.h"
-#import "MD5.h"
+#import "GrazyAppRequestTool.h"
+#import "GrazyUUIDTool.h"
+#import "GrazyMD5.h"
 
 
-@implementation AppRequestTool
-+(void)heartbeat:(NSString *)URLString comParam:(NSMutableDictionary *)com finished:(void (^)(NSDictionary *result))block{
+@implementation GrazyAppRequestTool
++(void)heartbeatWithcomParam:(NSMutableDictionary *)com finished:(void (^)(NSDictionary *result))block{
     
     NSNumber *time = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
     
@@ -30,11 +30,11 @@
     }.mutableCopy;
      
     
-       NSString *pr_str_md5 = [MD5 md532BitLower:[AppRequestTool stringWithDict:com]];
+       NSString *pr_str_md5 = [GrazyMD5 md532BitLower:[GrazyAppRequestTool stringWithDict:com]];
     
-    NSString *key_str_md5 = [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@%@",ak,pl,time]];
+    NSString *key_str_md5 = [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@%@",ak,pl,time]];
 
-    NSString *validator_sign =  [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@",key_str_md5,pr_str_md5]];
+    NSString *validator_sign =  [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@",key_str_md5,pr_str_md5]];
 
     NSLog(@"%@",param);
     NSDictionary *head = @{
@@ -47,14 +47,11 @@
     
     
     
-    
-    [AFNetWorkTool POST:URLString parameters:param head:head callBackBlock:^(BOOL success, NSURLSessionDataTask *task, id responseObject, NSError *error) {
-        
-        [AppRequestTool handleAjaxResult:success task:task data:responseObject error:error finished:block];
-    }];
+    [GrazyAppRequestTool postRequestInterface:@"heartbeat" andParam:param andSign:validator_sign finished:block];
+
 }
 
-+(void)userRegister:(NSString *)URLString comParam:(NSMutableDictionary *)com andUsrParam:(NSMutableDictionary *)usr finished:(void (^)(NSDictionary *result))block{
++(void)userRegisterWithcomParam:(NSMutableDictionary *)com andUsrParam:(NSMutableDictionary *)usr finished:(void (^)(NSDictionary *result))block{
     
     NSNumber *time = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
     
@@ -63,10 +60,6 @@
 
         [com setObject:@"111" forKey:@"imei"]; // 设备编号
 
-    
-    
-    
-    
     
     NSString *distinct_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"distinct_id"];
     if (distinct_id) {
@@ -94,40 +87,32 @@
          
     }.mutableCopy;
      
-    NSString *m = [AppRequestTool stringWithDict:usr];
-       NSString *sort_data = [MD5 md532BitLower:[AppRequestTool stringWithDict:usr]];
+    
+       NSString *sort_data = [GrazyMD5 md532BitLower:[GrazyAppRequestTool stringWithDict:usr]];
     
     
-    NSString *com_sort_data = [MD5 md532BitLower:[AppRequestTool stringWithDict:com]];
+    NSString *com_sort_data = [GrazyMD5 md532BitLower:[GrazyAppRequestTool stringWithDict:com]];
 
         // 用户属性
     
         
-    NSString *pr_str_md5 = [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@",sort_data,com_sort_data]];
+    NSString *pr_str_md5 = [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@",sort_data,com_sort_data]];
         
-    NSString *key_str_md5 = [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@%@",ak,pl,time]];
+    NSString *key_str_md5 = [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@%@",ak,pl,time]];
 
-    NSString *validator_sign =  [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@",key_str_md5,pr_str_md5]];
+    NSString *validator_sign =  [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@",key_str_md5,pr_str_md5]];
 
     NSLog(@"%@",param);
-    NSDictionary *head = @{
-        @"Accept":@"application/vnd.scrm.v1+json",
-        @"Content-Type":@"application/json",
-        @"sign":validator_sign
-    };
     
     
     
     
+    [GrazyAppRequestTool postRequestInterface:@"register" andParam:param andSign:validator_sign finished:block];
+
     
-    
-    [AFNetWorkTool POST:URLString parameters:param head:head callBackBlock:^(BOOL success, NSURLSessionDataTask *task, id responseObject, NSError *error) {
-        
-        [AppRequestTool handleAjaxResult:success task:task data:responseObject error:error finished:block];
-    }];
 }
 
-+(void)Push:(NSString *)URLString comParam:(NSMutableDictionary *)com andUsrPr:(NSMutableDictionary *)pr andEvent:(NSString *)event finished:(void (^)(NSDictionary *result))block{
++(void)PushWithcomParam:(NSMutableDictionary *)com andUsrPr:(NSMutableDictionary *)pr andEvent:(NSString *)event finished:(void (^)(NSDictionary *result))block{
     
     NSNumber *time = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
     
@@ -192,45 +177,30 @@
    
    
     
-       NSString *pr_sort_data = [MD5 md532BitLower:[AppRequestTool stringWithDict:pr]];
+       NSString *pr_sort_data = [GrazyMD5 md532BitLower:[GrazyAppRequestTool stringWithDict:pr]];
 
     
-    NSString *com_sort_data = [MD5 md532BitLower:[AppRequestTool stringWithDict:com]];
+    NSString *com_sort_data = [GrazyMD5 md532BitLower:[GrazyAppRequestTool stringWithDict:com]];
 
         // 用户属性
     
         
-    NSString *pr_str_md5 = [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@",pr_sort_data,com_sort_data]];
+    NSString *pr_str_md5 = [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@",pr_sort_data,com_sort_data]];
         
-    NSString *key_str_md5 = [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@%@%@",ak,pl,event,time]];
+    NSString *key_str_md5 = [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@%@%@",ak,pl,event,time]];
 
-    NSString *validator_sign =  [MD5 md532BitLower:[NSString stringWithFormat:@"%@%@",key_str_md5,pr_str_md5]];
+    NSString *validator_sign =  [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@",key_str_md5,pr_str_md5]];
 
-    NSLog(@"%@",param);
-    NSDictionary *head = @{
-        @"Accept":@"application/vnd.scrm.v1+json",
-        @"Content-Type":@"application/json",
-        @"sign":validator_sign
-    };
     
+   
     
+    [GrazyAppRequestTool postRequestInterface:@"push" andParam:param andSign:validator_sign finished:block];
     
-    
-    
-    
-    [AFNetWorkTool POST:URLString parameters:param head:head callBackBlock:^(BOOL success, NSURLSessionDataTask *task, id responseObject, NSError *error) {
-        
-        [AppRequestTool handleAjaxResult:success task:task data:responseObject error:error finished:block];
-    }];
+ 
 }
 
 
 +(void)handleAjaxResult:(BOOL)success task:(NSURLSessionDataTask *)task data:(id)responseObject error:(NSError *)error finished:(void (^)(NSDictionary *result))block{
-    //    NSString *receiveStr = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-    //    NSLog(@"%@",receiveStr);
-    
-    
-    //
     if (error) {
         NSLog(@"%@",error.description);
     }
@@ -277,7 +247,6 @@
         if([value isKindOfClass:[NSDictionary class]]) {
             
             value = [self stringWithDict:value];
-            
         }
         
         if([str length] !=0) {
@@ -285,9 +254,14 @@
             str = [str stringByAppendingString:@","];
             
         }
+        
         if ([value isKindOfClass:[NSNumber class]]) {
             // bool 类型要做特别处理
-            if ([categoryId isEqualToString:@"is_vip"]) {
+            if ([categoryId isEqualToString:@"is_vip"]
+                || [categoryId isEqualToString:@"is_first_day"]
+                || [categoryId isEqualToString:@"is_first_time"]
+                || [categoryId isEqualToString:@"is_login_id"]
+                ) {
                 int a = [value intValue];
                 if (a == 1) {
                     str = [str stringByAppendingFormat:@"\"%@\":true",categoryId];
@@ -310,4 +284,20 @@
     
     return str;
 }
++ (void)postRequestInterface:(NSString *)interfaceName andParam:(NSMutableDictionary *)param andSign:(NSString *)sign finished:(void (^)(NSDictionary *result))block {
+    
+    NSString *domain = @"https://testscrm.grazy.cn";
+    NSDictionary *head = @{
+        @"Accept":@"application/vnd.scrm.v1+json",
+        @"Content-Type":@"application/json",
+        @"sign":sign
+    };
+        [AFNetWorkTool POST:[NSString stringWithFormat:@"%@/open/%@",domain,interfaceName] parameters:param head:head callBackBlock:^(BOOL success, NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    
+            [GrazyAppRequestTool handleAjaxResult:success task:task data:responseObject error:error finished:block];
+        }];
+    
+    
+}
+
 @end

@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Arlexovincy. All rights reserved.
 //
 
-#import "MD5.h"
+#import "GrazyMD5.h"
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation MD5
+@implementation GrazyMD5
 
 /**
  *  把字符串加密成32位小写md5字符串

@@ -31,15 +31,72 @@ pod 'grabData'
 
 
 Demo详情请见 Example
-
-
-
-
-
- [[NSThread currentThread].threadDictionary setObject:@"232c6fdc2826f7b77c28a23d7cb11fbd" forKey:@"ak"];
-
-
-
 ## License
 
 grabData is available under the MIT license. See the LICENSE file for more info.
+
+
+
+###代码调用示例
+
+
+
+##接口调用文档
+
+// 初始化数据
+ [[NSThread currentThread].threadDictionary setObject:@"商家编码" forKey:@"ak"];
+
+ [[NSThread currentThread].threadDictionary setObject:@"平台类型" forKey:@"pl"]; // 
+
+
+
+
+
+
+
+### 推送实名制数据
+
+  NSMutableDictionary *com = @{
+
+​    @"origin_id":@"商机用户ID",
+
+​    @"imei":@"设备唯一编码"
+
+  }.mutableCopy;
+
+  NSMutableDictionary *usr = @{
+
+​    @"时间属性key1" : @"事件属性value1",
+
+​        @"时间属性key1" : @"事件属性value1",
+
+  }.mutableCopy;
+
+
+
+  [AppRequestTool userRegisterWithcomParam:com andUsrParam:usr finished:^(**id** **_Nonnull** result) { }];
+
+
+
+### 推送埋点数据
+
+  NSMutableDictionary *com = @{
+
+​    @"origin_id":@"商机用户ID",
+
+​    @"imei":@"设备唯一编码"
+
+  }.mutableCopy;
+
+  NSMutableDictionary *pr = @{
+
+​    @"时间属性key1" : @"事件属性value1",
+
+​        @"时间属性key1" : @"事件属性value1",
+
+  }.mutableCopy;
+
+  NSString *event = @"事件编码";
+
+[AppRequestTool PushWithcomParam:com andUsrPr:pr andEvent:event finished:^(**id** **_Nonnull** result) { }];
+

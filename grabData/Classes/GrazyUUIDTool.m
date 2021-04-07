@@ -6,11 +6,11 @@
 //  Copyright © 2018年 竹雨. All rights reserved.
 //
 
-#import "UUIDTool.h"
+#import "GrazyUUIDTool.h"
 
-NSString * const kUUIDKey = @"com.myApp.uuid";
+NSString * const kUUIDKeyGrazy = @"com.myApp.uuid";
 
-@implementation UUIDTool
+@implementation GrazyUUIDTool
 
 // 普通的获取UUID的方法
 + (NSString *)getUUID {
@@ -25,7 +25,7 @@ NSString * const kUUIDKey = @"com.myApp.uuid";
 
 + (NSString *)getUUIDInKeychain {
     // 1.直接从keychain中获取UUID
-    NSString *getUDIDInKeychain = (NSString *)[UUIDTool load:kUUIDKey];
+    NSString *getUDIDInKeychain = (NSString *)[GrazyUUIDTool load:kUUIDKeyGrazy];
     NSLog(@"从keychain中获取UUID%@", getUDIDInKeychain);
     
     // 2.如果获取不到，需要生成UUID并存入系统中的keychain
@@ -38,9 +38,9 @@ NSString * const kUUIDKey = @"com.myApp.uuid";
         CFRelease(uuidString);
         NSLog(@"生成UUID：%@",result);
         // 2.2 将生成的UUID保存到keychain中
-        [UUIDTool save:kUUIDKey data:result];
+        [GrazyUUIDTool save:kUUIDKeyGrazy data:result];
         // 2.3 从keychain中获取UUID
-        getUDIDInKeychain = (NSString *)[UUIDTool load:kUUIDKey];
+        getUDIDInKeychain = (NSString *)[GrazyUUIDTool load:kUUIDKeyGrazy];
     }
     
     return getUDIDInKeychain;
@@ -50,7 +50,7 @@ NSString * const kUUIDKey = @"com.myApp.uuid";
 #pragma mark - 删除存储在keychain中的UUID
 
 + (void)deleteKeyChain {
-    [self delete:kUUIDKey];
+    [self delete:kUUIDKeyGrazy];
 }
 
 

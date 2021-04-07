@@ -11,7 +11,6 @@
 #endif
 
 #import "AFNetWorkTool.h"
-#import "AppRequestTool.h"
 #import "MD5.h"
 #import "UUIDTool.h"
 
