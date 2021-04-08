@@ -25,7 +25,7 @@
     // 设置全局商家编码
     [[NSThread currentThread].threadDictionary setObject:@"232c6fdc2826f7b77c28a23d7cb11fbd" forKey:@"ak"];
     
-    
+    NSLog(@"xxxxxxx");
     
     UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
     b.frame = CGRectMake(20, 100, 100, 35.0);
