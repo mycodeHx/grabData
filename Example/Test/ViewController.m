@@ -6,10 +6,11 @@
 //
 
 #import "ViewController.h"
-#import "AppRequestTool.h"
-#import "UUIDTool.h"
-#import "MD5.h"
+#import "AFNetWorkTool.h"
+#import "GrazyUUIDTool.h"
+#import "GrazyMD5.h"
 #import "AFNetworking.h"
+#import "GrazyAppRequestTool.h"
 
 
 @interface ViewController ()
@@ -69,12 +70,12 @@
                            @"origin_id":@"1114"
                                   }.mutableCopy;
     
-    
-    [AppRequestTool heartbeat:@"https://devscrm.grazy.cn/open/heartbeat" comParam:com finished:^(id  _Nonnull result) {
-        if (result) { 
-            NSLog(@"%@",result);
+    [GrazyAppRequestTool heartbeatWithcomParam:com finished:^(NSDictionary * _Nonnull result) {
+        if (result) {
+//            [self showData:result];
         }
     }];
+    
 }
 
 
@@ -124,9 +125,9 @@
     [param setObject:usr forKey:@"usr"];
     
 
-    [AppRequestTool userRegister:@"https://devscrm.grazy.cn/open/register" comParam:com andUsrParam:usr finished:^(id  _Nonnull result) {
+    [GrazyAppRequestTool userRegisterWithcomParam:com andUsrParam:usr finished:^(id  _Nonnull result) {
         if (result) {
-            NSLog(@"%@",result);
+//            [self showData:result];
         }
     }];
     
@@ -185,9 +186,9 @@
     }.mutableCopy;
 
     
-    [AppRequestTool Push:@"https://devscrm.grazy.cn/open/push" comParam:com andUsrPr:pr andEvent:event finished:^(id  _Nonnull result) {
+    [GrazyAppRequestTool PushWithcomParam:com andUsrPr:pr andEvent:event finished:^(id  _Nonnull result) {
         if (result) {
-            NSLog(@"%@",result);
+//            [self showData:result];
         }
     }];
     

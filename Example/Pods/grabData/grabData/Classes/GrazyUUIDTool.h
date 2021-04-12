@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UUIDTool : NSObject
+@interface GrazyUUIDTool : NSObject
 
 /**
  * 普通的获取UUID的方法

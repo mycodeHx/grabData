@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MD5 : NSObject
+@interface GrazyMD5 : NSObject
 {
     
 }

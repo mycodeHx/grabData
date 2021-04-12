@@ -11,8 +11,9 @@
 #endif
 
 #import "AFNetWorkTool.h"
-#import "MD5.h"
-#import "UUIDTool.h"
+#import "GrazyAppRequestTool.h"
+#import "GrazyMD5.h"
+#import "GrazyUUIDTool.h"
 
 FOUNDATION_EXPORT double grabDataVersionNumber;
 FOUNDATION_EXPORT const unsigned char grabDataVersionString[];
