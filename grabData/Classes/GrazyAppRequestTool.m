@@ -60,12 +60,12 @@
         [com setObject:[GrazyUUIDTool getUUIDInKeychain] forKey:@"imei"]; // 设备编号
 
     
-    NSString *distinct_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"distinct_id"];
-    if (distinct_id) {
-        [com setObject:distinct_id forKey:@"distinct_id"];
-    } else {
-        return;
-    }
+//    NSString *distinct_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"distinct_id"];
+//    if (distinct_id) {
+//        [com setObject:distinct_id forKey:@"distinct_id"];
+//    } else {
+//        return;
+//    }
 
     
     if (!usr) {
@@ -116,8 +116,11 @@
     
    NSString *ak = [[NSThread currentThread].threadDictionary objectForKey:@"ak"];
     NSString *pl = @"ios";
-    
-    
+  int  is_push_event_enable =  [[NSUserDefaults standardUserDefaults] boolForKey:@"is_push_event_enable"];
+    //
+    if (!is_push_event_enable) {
+        return;
+    }
     
     
     
@@ -138,21 +141,21 @@
     
     
     
-    
-    NSString *distinct_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"distinct_id"];
-    if (distinct_id) {
-        [com setObject:distinct_id forKey:@"distinct_id"];
-    } else {
-        NSLog(@"distinct_id没有");
-        return;
-    }
-    NSString *session_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
-    if (session_id) {
-        [com setObject:session_id forKey:@"session_id"];
-    } else {
-        NSLog(@"session_id没有");
-        return;
-    }
+//
+//    NSString *distinct_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"distinct_id"];
+//    if (distinct_id) {
+//        [com setObject:distinct_id forKey:@"distinct_id"];
+//    } else {
+//        NSLog(@"distinct_id没有");
+//        return;
+//    }
+//    NSString *session_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"session_id"];
+//    if (session_id) {
+//        [com setObject:session_id forKey:@"session_id"];
+//    } else {
+//        NSLog(@"session_id没有");
+//        return;
+//    }
     
     
     if (!pr) {
@@ -209,16 +212,16 @@
                 if (result[@"data"]) {
                     if ([result[@"data"] isKindOfClass:[NSDictionary class]]) {
                         NSDictionary *data = result[@"data"];
-                        if (data[@"distinct_id"]) {
-                            NSString *distinct_id = data[@"distinct_id"];
-                            [[NSUserDefaults standardUserDefaults] setValue:distinct_id forKey:@"distinct_id"];
-                            [[NSUserDefaults standardUserDefaults] synchronize];
-                        }
-                        if (data[@"session_id"]) {
-                            NSString *session_id = data[@"session_id"];
-                            [[NSUserDefaults standardUserDefaults] setValue:session_id forKey:@"session_id"];
-                            [[NSUserDefaults standardUserDefaults] synchronize];
-                        }
+//                        if (data[@"distinct_id"]) {
+//                            NSString *distinct_id = data[@"distinct_id"];
+//                            [[NSUserDefaults standardUserDefaults] setValue:distinct_id forKey:@"distinct_id"];
+//                            [[NSUserDefaults standardUserDefaults] synchronize];
+//                        }
+//                        if (data[@"session_id"]) {
+//                            NSString *session_id = data[@"session_id"];
+//                            [[NSUserDefaults standardUserDefaults] setValue:session_id forKey:@"session_id"];
+//                            [[NSUserDefaults standardUserDefaults] synchronize];
+//                        }
                     }
                     
                     

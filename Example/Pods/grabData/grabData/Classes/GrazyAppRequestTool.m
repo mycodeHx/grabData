@@ -13,12 +13,16 @@
 @implementation GrazyAppRequestTool
 +(void)heartbeatWithcomParam:(NSMutableDictionary *)com finished:(void (^)(NSDictionary *result))block{
     
+    
     NSNumber *time = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
     
    NSString *ak = [[NSThread currentThread].threadDictionary objectForKey:@"ak"];
+    if (!ak) {
+        return;
+    }
     NSString *pl = @"ios";
-
-        [com setObject:@"111" forKey:@"imei"]; // 设备编号
+       
+        [com setObject:[GrazyUUIDTool getUUIDInKeychain] forKey:@"imei"]; // 设备编号
 
     NSMutableDictionary *param = @{
         @"ak":ak,
@@ -37,12 +41,7 @@
     NSString *validator_sign =  [GrazyMD5 md532BitLower:[NSString stringWithFormat:@"%@%@",key_str_md5,pr_str_md5]];
 
     NSLog(@"%@",param);
-    NSDictionary *head = @{
-        @"Accept":@"application/vnd.scrm.v1+json",
-        @"Content-Type":@"application/json",
-        @"sign":validator_sign
-    };
-    
+   
     
     
     
@@ -58,12 +57,11 @@
    NSString *ak = [[NSThread currentThread].threadDictionary objectForKey:@"ak"];
     NSString *pl = @"ios";
 
-        [com setObject:@"111" forKey:@"imei"]; // 设备编号
+        [com setObject:[GrazyUUIDTool getUUIDInKeychain] forKey:@"imei"]; // 设备编号
 
     
     NSString *distinct_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"distinct_id"];
     if (distinct_id) {
-        distinct_id = @"111";
         [com setObject:distinct_id forKey:@"distinct_id"];
     } else {
         return;
@@ -124,7 +122,7 @@
     
     
 //    [com setObject:[UUIDTool getUUIDInKeychain] forKey:@"imei"]; // 设备编号
-        [com setObject:@"111" forKey:@"imei"]; // 设备编号
+        [com setObject:[GrazyUUIDTool getUUIDInKeychain] forKey:@"imei"]; // 设备编号
 
     /*
     [com setObject:time forKey:@"event_time"]; // 事件写入时间
@@ -260,7 +258,20 @@
             if ([categoryId isEqualToString:@"is_vip"]
                 || [categoryId isEqualToString:@"is_first_day"]
                 || [categoryId isEqualToString:@"is_first_time"]
+                || [categoryId isEqualToString:@"is_live"]
+                || [categoryId isEqualToString:@"has_result"]
+                || [categoryId isEqualToString:@"is_historyword_used"]
+                || [categoryId isEqualToString:@"is_userlabel_used"]
+                || [categoryId isEqualToString:@"is_succeed"]
+                || [categoryId isEqualToString:@"is_start_class"]
                 || [categoryId isEqualToString:@"is_login_id"]
+                || [categoryId isEqualToString:@"is_freecourse"]
+                || [categoryId isEqualToString:@"is_finish_preparation"]
+                || [categoryId isEqualToString:@"is_endclass"]
+                || [categoryId isEqualToString:@"is_unnormal"]
+                || [categoryId isEqualToString:@"is_redo"]
+             
+
                 ) {
                 int a = [value intValue];
                 if (a == 1) {

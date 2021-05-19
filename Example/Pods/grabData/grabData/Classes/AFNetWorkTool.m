@@ -11,14 +11,14 @@
 +(AFHTTPSessionManager *)shareAFNManager {
     static AFHTTPSessionManager *manager;
     static dispatch_once_t onceToken;
+    NSLog(@"");
     dispatch_once(&onceToken,^{
         manager = [AFHTTPSessionManager manager];
+        
     });
     return manager;
 }
 + (NSDictionary *)getheadParam {
-    NSLog(@"");
-
     
     return @{};
    

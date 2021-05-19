@@ -14,21 +14,20 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - grabData (0.1.7):
+  - grabData (0.1.9):
     - AFNetworking
 
 DEPENDENCIES:
   - grabData
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - grabData
   trunk:
     - AFNetworking
+    - grabData
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  grabData: 3657990c8ee41aea178b0c401d007b2458025e24
+  grabData: c7a7489f4f6d2afe16678fb9a90c9f029cd7dc8d
 
 PODFILE CHECKSUM: 26e66ea7d22a1d3b19d156a8cb9f7d15106d7071
 

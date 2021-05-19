@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'grabData'
-  s.version          = '0.1.8'
+  s.version          = '0.2.0'
   s.summary          = '埋点'
 
 # This description is used to generate tags and improve search results.
