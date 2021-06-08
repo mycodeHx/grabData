@@ -16,7 +16,7 @@
     
     NSNumber *time = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
     
-   NSString *ak = [[NSThread currentThread].threadDictionary objectForKey:@"ak"];
+    NSString *ak = [[NSUserDefaults standardUserDefaults] objectForKey:@"ak"];
     if (!ak) {
         return;
     }
@@ -54,7 +54,10 @@
     
     NSNumber *time = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
     
-   NSString *ak = [[NSThread currentThread].threadDictionary objectForKey:@"ak"];
+    NSString *ak = [[NSUserDefaults standardUserDefaults] objectForKey:@"ak"];
+    if (!ak) {
+        return;
+    }
     NSString *pl = @"ios";
 
         [com setObject:[GrazyUUIDTool getUUIDInKeychain] forKey:@"imei"]; // 设备编号
@@ -110,11 +113,14 @@
     
 }
 
-+(void)PushWithcomParam:(NSMutableDictionary *)com andUsrPr:(NSMutableDictionary *)pr andEvent:(NSString *)event finished:(void (^)(NSDictionary *result))block{
++(void)PushWithcomParam:(NSMutableDictionary *)com andUsrPr:(NSMutableDictionary *)pr andMod:(NSMutableDictionary *)mod andEvent:(NSString *)event finished:(void (^)(NSDictionary *result))block{
     
     NSNumber *time = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
     
-   NSString *ak = [[NSThread currentThread].threadDictionary objectForKey:@"ak"];
+    NSString *ak = [[NSUserDefaults standardUserDefaults] objectForKey:@"ak"];
+    if (!ak) {
+        return;
+    }
     NSString *pl = @"ios";
   int  is_push_event_enable =  [[NSUserDefaults standardUserDefaults] boolForKey:@"is_push_event_enable"];
     //
@@ -172,6 +178,7 @@
         @"time":time,
         @"event":event,
         @"com":com,
+        @"mod":mod,
         @"pr":pr
         
     }.mutableCopy;
@@ -212,6 +219,14 @@
                 if (result[@"data"]) {
                     if ([result[@"data"] isKindOfClass:[NSDictionary class]]) {
                         NSDictionary *data = result[@"data"];
+                        if (data) {
+                            if (data[@"domain"]) {
+                                NSString *domain = data[@"domain"];
+                                [[NSUserDefaults standardUserDefaults] setValue:domain forKey:@"domain"];
+                                [[NSUserDefaults standardUserDefaults] synchronize];
+                            }
+                        }
+                       
 //                        if (data[@"distinct_id"]) {
 //                            NSString *distinct_id = data[@"distinct_id"];
 //                            [[NSUserDefaults standardUserDefaults] setValue:distinct_id forKey:@"distinct_id"];
@@ -273,8 +288,7 @@
                 || [categoryId isEqualToString:@"is_endclass"]
                 || [categoryId isEqualToString:@"is_unnormal"]
                 || [categoryId isEqualToString:@"is_redo"]
-             
-
+                || [categoryId isEqualToString:@"wifi"]
                 ) {
                 int a = [value intValue];
                 if (a == 1) {
@@ -301,17 +315,27 @@
 + (void)postRequestInterface:(NSString *)interfaceName andParam:(NSMutableDictionary *)param andSign:(NSString *)sign finished:(void (^)(NSDictionary *result))block {
     
     NSString *domain = @"https://testscrm.grazy.cn";
+    if ([interfaceName isEqualToString:@"push"]) {
+       NSString *newDomain = [[NSUserDefaults standardUserDefaults] objectForKey:@"domain"];
+        if (domain.length > 0) {
+            domain = newDomain;
+        }
+    }
+    
+    
     NSDictionary *head = @{
         @"Accept":@"application/vnd.scrm.v1+json",
         @"Content-Type":@"application/json",
         @"sign":sign
     };
         [AFNetWorkTool POST:[NSString stringWithFormat:@"%@/open/%@",domain,interfaceName] parameters:param head:head callBackBlock:^(BOOL success, NSURLSessionDataTask *task, id responseObject, NSError *error) {
-    
+              
             [GrazyAppRequestTool handleAjaxResult:success task:task data:responseObject error:error finished:block];
+            
         }];
     
     
 }
+
 
 @end

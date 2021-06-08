@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(void)heartbeatWithcomParam:(NSMutableDictionary *)com finished:(void (^)(NSDictionary *result))block;
 +(void)userRegisterWithcomParam:(NSMutableDictionary *)com andUsrParam:(NSMutableDictionary *)usr finished:(void (^)(NSDictionary *result))block;
-+(void)PushWithcomParam:(NSMutableDictionary *)com andUsrPr:(NSMutableDictionary *)pr andEvent:(NSString *)event finished:(void (^)(NSDictionary *result))block;
++(void)PushWithcomParam:(NSMutableDictionary *)com andUsrPr:(NSMutableDictionary *)pr andMod:(NSMutableDictionary *)mod andEvent:(NSString *)event finished:(void (^)(NSDictionary *result))block;
 @end
 
 NS_ASSUME_NONNULL_END
